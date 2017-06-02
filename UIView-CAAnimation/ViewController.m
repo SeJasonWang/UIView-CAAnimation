@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "UIView+CAAnimation.h"
 
 @interface ViewController ()
 
@@ -16,14 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        imageView.image = [UIImage imageNamed:@"test"];
+        [self.view addSubview:imageView];
+        
+        [imageView addCircleMaskAnimation];
+    });
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end
